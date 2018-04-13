@@ -21,7 +21,7 @@ describe 'A user visits the trip pages' do
   end
 
   describe 'to link to the trip#show' do
-    it 'shows all that totals info' do
+    it 'shows all that total' do
       trip = Trip.create(name: 'bobs trail', start_date: Time.now, end_date: Time.now)
       trail1 = trip.trails.create!(length: 60, name: 'incline', address: '123')
       trail2 = trip.trails.create!(length: 25, name: 'decline', address: '456')
@@ -35,7 +35,7 @@ describe 'A user visits the trip pages' do
   end
 
   describe 'to link to the trip#show' do
-    it 'shows all totals info' do
+    it 'shows all average' do
       trip = Trip.create(name: 'bobs trail', start_date: Time.now, end_date: Time.now)
       trail1 = trip.trails.create!(length: 60, name: 'incline', address: '123')
       trail2 = trip.trails.create!(length: 40, name: 'decline', address: '456')
@@ -49,7 +49,7 @@ describe 'A user visits the trip pages' do
   end
 
   describe 'to link to the trip#show' do
-    it 'shows all that totals info' do
+    it 'shows longest' do
       trip = Trip.create(name: 'bobs trail', start_date: Time.now, end_date: Time.now)
       trail1 = trip.trails.create!(length: 60, name: 'incline', address: '123')
       trail2 = trip.trails.create!(length: 40, name: 'decline', address: '456')
@@ -59,6 +59,20 @@ describe 'A user visits the trip pages' do
       click_link trip.id
 
       expect(page).to have_content('Longest Hike: 60')
+    end
+  end
+
+  describe 'to link to the trip#show' do
+    it 'shows shortest' do
+      trip = Trip.create(name: 'bobs trail', start_date: Time.now, end_date: Time.now)
+      trail1 = trip.trails.create!(length: 60, name: 'incline', address: '123')
+      trail2 = trip.trails.create!(length: 40, name: 'decline', address: '456')
+
+      visit trips_path
+
+      click_link trip.id
+
+      expect(page).to have_content('Shortest Hike: 40')
     end
   end
 

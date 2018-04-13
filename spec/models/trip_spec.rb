@@ -30,5 +30,13 @@ RSpec.describe Trip, type: :model do
 
       expect(trip.max).to eq(60)
     end
+
+    it 'finds shortes' do
+      trip = Trip.create(name: 'bobs trail', start_date: Time.now, end_date: Time.now)
+      trip.trails.create!(length: 60, name: 'incline', address: '123')
+      trip.trails.create!(length: 40, name: 'decline', address: '456')
+
+      expect(trip.min).to eq(40)
+    end
   end
 end
