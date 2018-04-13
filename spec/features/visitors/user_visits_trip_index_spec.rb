@@ -34,4 +34,18 @@ describe 'A user visits the trip pages' do
     end
   end
 
+  describe 'to link to the trip#show' do
+    it 'shows all that trip info' do
+      trip = Trip.create(name: 'bobs trail', start_date: Time.now, end_date: Time.now)
+      trail1 = trip.trails.create!(length: 60, name: 'incline', address: '123')
+      trail2 = trip.trails.create!(length: 40, name: 'decline', address: '456')
+
+      visit trips_path
+
+      click_link trip.id
+
+      expect(page).to have_content('Average Distance: 50')
+    end
+  end
+
 end
